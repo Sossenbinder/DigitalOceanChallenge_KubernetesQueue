@@ -1,0 +1,9 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: digitalocean-topic
+  labels:
+    strimzi.io/cluster: "digitaloceancluster"
+spec:
+  partitions: 3
+  replicas: 1

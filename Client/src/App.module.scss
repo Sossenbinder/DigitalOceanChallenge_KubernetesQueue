@@ -1,0 +1,81 @@
+body,
+html {
+	height: 100vh;
+	width: 100vw;
+}
+
+.App {
+	height: 100%;
+	width: 100%;
+	display: grid;
+	place-items: center;
+
+	.ButtonContainer {
+		width: 30%;
+		height: 50%;
+
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+
+		.PublishContainer {
+			width: 50%;
+			height: 100%;
+
+			margin-right: 5px;
+
+			display: grid;
+			place-items: center;
+
+			.Publish {
+				height: 20%;
+				width: 100%;
+
+				.Input {
+					height: 30px;
+					width: 100%;
+				}
+
+				.PublishButton {
+					max-height: 50px;
+					min-height: 30px;
+					width: 100%;
+					background-color: lightgreen;
+					border-radius: 5px;
+
+					display: grid;
+					place-items: center;
+					cursor: pointer;
+					user-select: none;
+				}
+			}
+		}
+
+		.LogStream {
+			width: 50%;
+			height: 100%;
+
+			background-color: lightblue;
+			border-radius: 5px;
+
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: space-around;
+
+			.Label {
+				height: 20px;
+				user-select: none;
+			}
+
+			.LogList {
+				width: 90%;
+				height: 90%;
+
+				overflow-y: scroll;
+
+				background-color: rgb(243, 242, 242);
+			}
+		}
+	}
+}
