@@ -1,9 +1,13 @@
-kind create cluster --config=./Kind/kindcluster.yaml
+param (
+	[string] $configuration = "prod"
+)
 
-& "./Kind/kindRegistry.ps1"
+if ($configuration -eq "prod") {
+	kind create cluster --config=./Kind/kindcluster.yaml
 
-# Switch to the correct kind cluster
-kubectl config use-context kind-digitaloceanchallenge
+	# Switch to the correct kind cluster
+	kubectl config use-context kind-digitaloceanchallenge
+}
 
 # Install strimzi
 kubectl create namespace kafka
@@ -15,4 +19,5 @@ kubectl apply -f ./Resources/kafka/kafkaCluster.yaml -n kafka
 # Create a kafka topic through strimzi
 kubectl apply -f ./Resources/kafka/kafkaTopic.yaml -n kafka 
 
-kubectl apply -f ./Resources/app/api.yaml
+kubectl apply -k ./Resources/server/overlays/$($configuration)
+kubectl apply -f ./Resources/client/client.yaml

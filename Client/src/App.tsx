@@ -2,13 +2,16 @@ import React from "react";
 
 import styles from "./App.module.scss";
 
+const websocketUrl = "ws://digitaloceanchallengeserver.default.svc.cluster.local:8080"; // Locally: "ws://localhost:30013"
+const nodeUrl = "http://digitaloceanchallengeserver.default.svc.cluster.local:3000"; // Locally: "http://localhost:30012"
+
 const App = () => {
 	const [inputMsg, setInputMsg] = React.useState("");
 	const [kafkaMessages, setKafkaMessages] = React.useState<Array<string>>([]);
 	const logListRef = React.useRef<HTMLDivElement>(null);
 
 	React.useEffect(() => {
-		const connection = new WebSocket("ws://localhost:30013");
+		const connection = new WebSocket(websocketUrl);
 		connection.onmessage = (msg: MessageEvent<string>) => setKafkaMessages((current) => [...current, msg.data]);
 		return () => connection.close();
 	}, []);
@@ -26,7 +29,7 @@ const App = () => {
 			return;
 		}
 
-		await fetch(`http://localhost:30012/publishMessage?message=${inputMsg}`, { method: "POST", mode: "no-cors" });
+		await fetch(`${nodeUrl}/publishMessage?message=${inputMsg}`, { method: "POST", mode: "no-cors" });
 	};
 
 	return (

@@ -1,10 +1,7 @@
+# Expose all ports required by the setup for good measure
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 name: digitaloceanchallenge
-containerdConfigPatches:
-  - |-
-    [plugins."io.containerd.grpc.v1.cri".registry.mirrors."localhost:5000"]
-      endpoint = ["http://kindRegistry:5000"]
 nodes:
   - role: control-plane
     extraPortMappings:
@@ -14,3 +11,5 @@ nodes:
         hostPort: 30012
       - containerPort: 30013
         hostPort: 30013
+      - containerPort: 30015
+        hostPort: 30015

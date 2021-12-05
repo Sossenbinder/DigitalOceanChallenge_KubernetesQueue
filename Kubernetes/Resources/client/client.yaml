@@ -1,0 +1,42 @@
+# There's no dev deployment here - For dev, this was built locally with the server being accessible through k8s NodePort
+apiVersion: v1
+kind: Service
+metadata:
+  name: digitaloceanchallengeclient
+spec:
+  selector:
+    name: digitaloceanchallengeclient
+  type: NodePort
+  ports:
+    - name: http
+      protocol: TCP
+      nodePort: 30015
+      port: 3000
+      targetPort: 3000
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: digitaloceanchallengeclient
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: digitaloceanchallengeclient
+  template:
+    metadata:
+      labels:
+        name: digitaloceanchallengeclient
+    spec:
+      containers:
+        - name: digitaloceanchallengeclient
+          image: sossenbinder/digitaloceanchallengeclient:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+              name: http
+          resources:
+            limits:
+              cpu: 200m
+              memory: 200Mi
