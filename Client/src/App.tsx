@@ -2,8 +2,8 @@ import React from "react";
 
 import styles from "./App.module.scss";
 
-const websocketUrl = "ws://digitaloceanchallengeserver.default.svc.cluster.local:8080"; // Locally: "ws://localhost:30013"
-const nodeUrl = "http://digitaloceanchallengeserver.default.svc.cluster.local:3000"; // Locally: "http://localhost:30012"
+const websocketUrl = "ws://188.166.135.128/websocket"; // Locally: "ws://localhost:30013"
+const nodeUrl = "http://188.166.135.128"; // Locally: "http://localhost:30012"
 
 const App = () => {
 	const [inputMsg, setInputMsg] = React.useState("");

@@ -6,12 +6,11 @@ metadata:
 spec:
   selector:
     name: digitaloceanchallengeclient
-  type: NodePort
+  type: ClusterIP
   ports:
     - name: http
       protocol: TCP
-      nodePort: 30015
-      port: 3000
+      port: 80
       targetPort: 3000
 
 ---
@@ -38,5 +37,5 @@ spec:
               name: http
           resources:
             limits:
-              cpu: 200m
-              memory: 200Mi
+              cpu: 30m
+              memory: 800Mi
