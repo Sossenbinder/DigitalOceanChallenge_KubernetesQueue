@@ -12,13 +12,34 @@ On top, the node server is connected to the client through a WebSocket server, w
 
 # Deployment
 
+Steps required to publish:
+
+```
+	kubectl create namespace kafka
+	kubectl create -f 'https://strimzi.io/install/latest?namespace=kafka' -n kafka
+
+	# Create a kafka node through strimzi
+	kubectl apply -f ./Resources/kafka/kafkaCluster.yaml -n kafka
+
+	# Create a kafka topic through strimzi
+	kubectl apply -f ./Resources/kafka/kafkaTopic.yaml -n kafka
+
+	kubectl apply -k ./Resources/server/overlays/$($configuration)
+	kubectl apply -f ./Resources/client/client.yaml
+
+	if ($configuration -eq "prod") {
+		kubectl apply -f ./Resources/client/overlays/prod/ingress.yaml
+		kubectl apply -f ./Resources/server/overlays/prod/ingress.yaml
+	}
+```
+
 ## Local deployment:
 
 For local deployment, kind is used (see https://kind.sigs.k8s.io/).
 
 In order to deploy, run deploy.ps1 with -configuration dev.
 
-This will setup the respective kind cluster, and through regular kubectl apply -f and kubectly apply -k with kustomize the respective mappings.
+This will setup the respective kind cluster, either through regular kubectl apply -f or kubectly apply -k with kustomize in order to deploy the respective environment setup.
 
 ## Prod deployment.
 
