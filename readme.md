@@ -19,3 +19,9 @@ This will setup the respective kind cluster, and through regular kubectl apply -
 ## Prod deployment.
 
 For prod deployment, deploy.ps1 will skip kind and setup for the respective current kubectl context.
+
+In addition, instead of using a nodeport, we make use of a Loadbalancer + several ingress rules here which map the respective paths to the correct service.
+
+The final example app is available at http://188.166.135.128
+
+Things like https etc. were omitted, because this is not necessarily part of the POC
