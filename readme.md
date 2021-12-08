@@ -1,10 +1,14 @@
 This repo tackles the "Deploy a scalable message queue" challenge mentioned in https://www.digitalocean.com/community/pages/kubernetes-challenge#anchor--challenges.
 
-As suggested, strimzi was used to deploy the kafka cluster. Besides that, this repo contains of a client application which allows submitting messages and viewing the logstream.
+# Setup
+
+As suggested, https://strimzi.io was used to deploy the kafka cluster. Besides that, this repo contains of a client application which allows submitting messages and viewing the logstream.
 
 The client is connected to a node server, which publishes the message to kafka.
 
 On top, the node server is connected to the client through a WebSocket server, which will publish any kafka updates the consumer on the node server receives.
+
+![Example app](https://i.imgur.com/jrKzodh.png)
 
 # Deployment
 
