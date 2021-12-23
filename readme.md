@@ -47,6 +47,6 @@ For prod deployment, deploy.ps1 will skip kind and setup for the respective curr
 
 In addition, instead of using a nodeport, we make use of a Loadbalancer + several ingress rules here which map the respective paths to the correct service.
 
-The final example app is available at http://188.166.135.128
+The final example app is available at http://188.166.135.128, which points to a load balancer backed by a kubernetes cluster in digital ocean.
 
 Things like https etc. were omitted, because this is not necessarily part of the POC
